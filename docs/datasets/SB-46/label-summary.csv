@@ -1,0 +1,4 @@
+﻿"Split","LabelCount","ClassCount","UnknownClass","DuplicateSample","SignerCount","Signers"
+"Train","28142","226","0","0","31","signer0, signer10, signer12, signer13, signer15, signer17, signer19, signer2, signer20, signer21, signer22, signer23, signer24, signer26, signer28, signer29, signer3, signer31, signer32, signer33, signer36, signer37, signer38, signer4, signer40, signer41, signer42, signer5, signer7, signer8, signer9"
+"Validation","4418","226","0","0","6","signer1, signer11, signer16, signer18, signer25, signer35"
+"Test","3742","226","0","0","6","signer14, signer27, signer30, signer34, signer39, signer6"

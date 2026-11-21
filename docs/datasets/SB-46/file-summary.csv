@@ -1,0 +1,4 @@
+﻿"Split","Files","TotalBytes","MissingColor","MissingDepth","UnexpectedFiles","EmptyFiles"
+"Train","56284","19111761758","0","0","0","0"
+"Validation","8836","3218995247","0","0","0","0"
+"Test","7484","2796878753","0","0","0","0"
