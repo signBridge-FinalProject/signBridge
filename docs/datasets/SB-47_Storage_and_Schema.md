@@ -81,6 +81,7 @@ is supplementary; the committed PDF's field-level specification was read.
 | §6 utterances/tokens/spans | All three tables retained for curated examples only; positive contiguous append order, same-utterance endpoints, overlap allowed, edits invalidate verification |
 | Empty utterances rejected in logical design | An empty **illustrative assembly record** is allowed until tokens are inserted; a verified empty utterance is rejected. This supports parent/child insertion without deferred application-specific commit hooks |
 | SQL dialect left open | SQLite STRICT, minimum 3.37; logical BOOLEAN becomes INTEGER 0/1; DATE becomes validated ISO date TEXT, review timestamp becomes UTC `YYYY-MM-DDTHH:MM:SSZ` TEXT |
+| §5.3 review history: `review_id` is the primary key | Add `event_sequence INTEGER PRIMARY KEY AUTOINCREMENT` as the physical primary key; retain `review_id` as `TEXT NOT NULL UNIQUE`. The append-only log needs a deterministic, increasing insertion order for the latest-event-wins rule, independent of review-ID text or timestamp ties. The sign/clip status guards select the latest event with `ORDER BY event_sequence DESC`, and `reviews_by_target` indexes that order. `review_id` remains the unique logical event identifier; `event_sequence` is not a claim about when the real-world review occurred. |
 | Stable, non-reused IDs | Sign rows cannot be hard-deleted or renamed; `is_active=0` retires an ID. Added explicitly instead of relying on deletion discipline |
 | Original dataset/version/class mapping | Add `dataset_release`, `dataset_class`, `dataset_split`, `dataset_signer_split`, `video_sample` because actual inventory/split metadata was not modelled in SB-14 |
 | Candidate/confirmed mapping and reviewed evidence | Candidates may coexist; confirmation additionally requires recorded rights assessment and a checked, non-draft sign. It remains distinct from expert review |
@@ -139,6 +140,8 @@ foreign keys, duplicate samples, signer-split isolation, original label text,
 relative paths, review evidence, confirmed-mapping/default-clip uniqueness,
 Turkish Unicode handling, spans and the JSON gate. No actual data was imported,
 no videos decoded, no MediaPipe pipeline run and no model evaluated.
+
+**Validation-run provenance.** The checked-in validation record documents the original Linux run on Python 3.12.14 / SQLite 3.53.1 (31 tests passed). The PR description reports a separate publication-time run on Python 3.13, and Yasmin's review of 22 November 2026 reports an independent temporary-environment run on Python 3.13.18 (31 tests passed). These are separate runs, not conflicting descriptions of one environment. The latter two are attributed reports; they do not replace the checked-in original record or establish a Windows run. Windows execution remains pending. The review does not constitute team/advisor acceptance of SQLite; record that decision's owner and date before SB-51 relies on the schema.
 
 GitHub branch: **`SB-47`**, exact uppercase issue key, published with an
 issue-referencing commit and a PR (title plus Jira link) targeting `main` on
