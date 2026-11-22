@@ -9,7 +9,7 @@ import { Home, KeyboardGuide, InstallGuide, NotFound } from './pages'
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').catch(error => {
-      console.warn('Çevrimdışı kullanım hazırlanamadı.', error)
+      console.warn('Offline setup failed.', error)
     })
   })
 }

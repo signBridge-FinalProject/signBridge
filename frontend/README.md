@@ -1,6 +1,6 @@
 # SignBridge-TR frontend
 
-SB-54 introduces a Turkish-language PWA shell for the project’s TİD ↔ Turkish interface. We chose **React with Vite** because this milestone needs client-side routing, reusable components and a static build that runs independently of the backend. There is no server-rendering or server-side data requirement to justify Next.js here. No API keys, environment file or backend process are needed. Icons and fonts ship with the app.
+SB-54 introduces a PWA shell with an English interface for the Turkish Sign Language (TİD) ↔ Turkish research project. We chose **React with Vite** because this milestone needs client-side routing, reusable components and a static build that runs independently of the backend. There is no server-rendering or server-side data requirement to justify Next.js here. No API keys, environment file or backend process are needed. Icons and fonts ship with the app.
 
 ## Run locally
 
@@ -35,8 +35,8 @@ The current routes are `/`, `/klavye` and `/kurulum`, with a recovery link for u
 
 | Action | Expected result |
 | --- | --- |
-| Open the home page in a fresh tab. Press Tab, Enter, then Tab. | “Ana içeriğe geç” appears first. Enter focuses the main content. The next Tab reaches “Klavye ile gezinme”. |
-| Open that link with Enter, then use Back and Forward. | The new page title updates and a visible outline surrounds its main heading each time. On the keyboard guide, the next Tab reaches “Başlangıca dön”. |
+| Open the home page in a fresh tab. Press Tab, Enter, then Tab. | “Skip to main content” appears first. Enter focuses the main content. The next Tab reaches “Keyboard navigation”. |
+| Open that link with Enter, then use Back and Forward. | The new page title updates and a visible outline surrounds its main heading each time. On the keyboard guide, the next Tab reaches “Back to home”. |
 | Inspect the home, keyboard, install and unknown routes at 360, 768 and 1280 CSS pixels. | Text wraps, all links stay visible and the page has no horizontal scroll. |
 | With VoiceOver or TalkBack, navigate by headings, landmarks and links. Open the keyboard guide. | The navigation has a name, links describe their destination, and the new heading is announced. |
 | In a regular supported browser, install the preview and open its icon. After the service worker is active, disconnect the network and reload a guide. | The icon launches the home route in a standalone window. The guide, fonts and navigation remain available offline. |

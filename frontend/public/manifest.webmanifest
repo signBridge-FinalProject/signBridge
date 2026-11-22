@@ -1,8 +1,8 @@
 {
   "id": "/",
-  "name": "SignBridge-TR · İşaret Köprüsü",
+  "name": "SignBridge-TR",
   "short_name": "SignBridge",
-  "lang": "tr",
+  "lang": "en",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
