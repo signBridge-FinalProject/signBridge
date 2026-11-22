@@ -79,7 +79,7 @@ The conditions of stage 1 (who plays which role, how the conditions are simulate
 | # | Question | Persona and path | Class and stage | Source |
 |---|---|---|---|---|
 | Q1 | Does the participant complete the happy path without researcher assistance? | All four | P1, P2 | Criteria 14, 16 |
-| Q2 | Is the order "explicit end of sign, review the sentence, confirm or edit, then speak" clear, and does anyone speak a sentence before confirming it? | Can (HP-4), Ayşe (HP-1) | I now; P1, P2 later | Criterion 12 |
+| Q2 | Is the order "explicit end of sign, review the sentence, confirm or edit, then speak" clear for a newly generated sentence, and does anyone speak a newly generated sentence before confirming it? (The confirm/edit check applies to newly generated sentences. One-tap replay of a previously confirmed, saved quick phrase (UC-10) is the documented exception and is kept; it is not a breach of this check.) | Can (HP-4), Ayşe (HP-1) | I now; P1, P2 later | Criterion 12 |
 | Q3a | Are the avatar playback, caption and replay controls easy to find and use? (Usability of the controls only. It is not evidence that anyone understands the signs.) | Ayşe, Emre in HP-3 | I now; P1 later | RQ3; criterion 12 |
 | Q3b | Do Deaf TİD users understand the avatar output and the caption in the service flow? | Ayşe, Emre in HP-3 | **P2 only**, if Deaf TİD users are reached. A simulated stage (P1) cannot answer it | RQ3 |
 | Q4 | Can the hearing counterpart start and follow the flow without learning the app first? | Mehmet, clerk, café staff | P1, P2 | O7; Table 3 needs |
