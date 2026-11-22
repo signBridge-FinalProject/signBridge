@@ -92,7 +92,7 @@ No participant evaluation or new recordings should begin until the required inst
 signBridge/
 ├── .github/workflows/        # Jira Done gate automation
 ├── backend/                  # Reserved for backend implementation
-├── frontend/                 # Reserved for frontend implementation
+├── frontend/                 # React PWA shell and shared accessible layout
 ├── ml/eval/                  # MediaPipe evaluation scripts
 ├── docs/
 │   ├── SignBridge-TR_Project_Proposal.pdf
@@ -111,7 +111,7 @@ signBridge/
 └── README.md
 ```
 
-The `frontend/` and `backend/` folders are **placeholders**, not runnable applications. No unsupported installation or deployment commands are provided. The tracked-file check recorded under [SB-26](https://el-dili.atlassian.net/browse/SB-26) found no committed `.venv/` files on the inspected branch; this is **not** an audit of every historical commit or branch.
+The [frontend README](frontend/README.md) covers local setup, the production build and keyboard checks for the standalone PWA shell. The `backend/` folder is reserved for future implementation. The tracked-file check recorded under [SB-26](https://el-dili.atlassian.net/browse/SB-26) found no committed `.venv/` files on the inspected branch; this is **not** an audit of every historical commit or branch.
 
 ## Project documents
 
