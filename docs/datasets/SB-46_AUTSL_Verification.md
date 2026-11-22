@@ -63,6 +63,8 @@ This establishes disjointness of the provided signer identifiers. It is not an i
 
 The complete mapping remains a local dataset-derived output. Do not add it, source label files, raw videos, extracted landmarks, archive credentials or private download URLs to the repository without checking redistribution permission. The report can reference the local mapping and its digest without republishing all mapping rows.
 
+**Private handoff / reproduction (AC-4).** An authorized teammate can request the exact verified export privately from Ceren Bilgenoğlu under the team's dataset-access permissions and verify SHA-256 `57a2a1fbaa2e1646089cbaaa346f8448039cf0de2b6cdc6aa1bbc856a82f2eb1`. Alternatively, regenerate the mapping from the authorized local `SignList_ClassId_TR_EN.csv` by reading `ClassId,TR,EN`, sorting numerically by `ClassId` and exporting those three fields without changing source spellings; verify 226 unique IDs, 0–225, and non-empty names. The digest identifies the exact supplied export, not the provider's source file; a regenerated CSV may have different bytes because of encoding, quoting or line endings and must be compared by content as well. Do not publish the source list or regenerated full mapping in GitHub.
+
 ## Archive integrity and resolved incident
 
 | Split | Number of parts | Total archive bytes | Final displayed test result | Displayed extraction result |
