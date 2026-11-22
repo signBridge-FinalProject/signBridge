@@ -1,0 +1,4 @@
+split,label_rows,distinct_sample_ids,duplicate_sample_ids,class_ids_not_in_class_list,classes_in_class_list,classes_with_zero_samples,min_samples_per_class_incl_zero,max_samples_per_class,distinct_signer_prefixes
+train,28142,28142,0,0,226,0,90,127,31
+validation,4418,4418,0,0,226,0,12,20,6
+test,3742,3742,0,0,226,0,10,17,6
