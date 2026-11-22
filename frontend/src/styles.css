@@ -42,7 +42,7 @@ nav a:hover, .back-link:hover { text-decoration: underline; }
 
 .hero { display: grid; grid-template-columns: 1.12fr 1fr; border-radius: 1.4rem; background: var(--lilac); }
 .hero-copy { align-self: center; padding: clamp(1.5rem, 4.8vw, 4rem); }
-.hero-copy h1 { width: fit-content; color: var(--indigo); }
+.hero-copy h1 { max-width: 7ch; color: var(--indigo); }
 .hero-copy p { max-width: 33ch; margin-top: 1rem; font-size: clamp(1rem, 1.65vw, 1.22rem); }
 .illustration {
   position: relative;
@@ -85,6 +85,7 @@ kbd { padding: .02em .28em; border: 1px solid var(--line); border-bottom-width: 
   nav a { padding-inline: .55rem; }
   .hero { grid-template-columns: 1fr; }
   .hero-copy { padding-bottom: .5rem; }
+  .hero-copy h1 { max-width: none; }
   .illustration { width: min(62%, 13rem); margin: .75rem 1.5rem 1.25rem auto; }
   .guide-section { grid-template-columns: 1fr; }
   .guide-link { gap: .7rem; }

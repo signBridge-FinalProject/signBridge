@@ -16,8 +16,8 @@ export function Home() {
     <>
       <div className="hero">
         <div className="hero-copy">
-          <h1 tabIndex={-1}>SignBridge</h1>
-          <p>A research project exploring how Turkish Sign Language (TİD) users and Turkish speakers can communicate in everyday situations.</p>
+          <h1 tabIndex={-1}>İşaret Köprüsü</h1>
+          <p>Türk İşaret Dili ile Türkçe arasında günlük iletişimi desteklemek için geliştirilen bir araştırma projesi.</p>
         </div>
         <div className="illustration" aria-hidden="true">
           <div className="bubble sign"><Hand /></div>
@@ -25,10 +25,10 @@ export function Home() {
         </div>
       </div>
       <section className="guide-section" aria-labelledby="rehber">
-        <h2 id="rehber">User guides</h2>
+        <h2 id="rehber">Kullanım rehberi</h2>
         <div className="guide-list">
-          <GuideLink to="/klavye" title="Keyboard navigation" description="Follow links and skip to the main content." Icon={Keyboard} />
-          <GuideLink to="/kurulum" title="Install SignBridge" description="Open the app from your home screen and use it offline." Icon={MonitorDown} />
+          <GuideLink to="/klavye" title="Klavye ile gezinme" description="Bağlantılara ulaşın ve ana içeriğe geçin." Icon={Keyboard} />
+          <GuideLink to="/kurulum" title="Cihaza kurulum" description="Ana ekrandan açın ve çevrimdışı kullanın." Icon={MonitorDown} />
         </div>
       </section>
     </>
@@ -40,35 +40,35 @@ function Article({ title, children }) {
     <article className="article">
       <h1 tabIndex={-1}>{title}</h1>
       {children}
-      <Link className="back-link" to="/"><ArrowLeft aria-hidden="true" />Back to home</Link>
+      <Link className="back-link" to="/"><ArrowLeft aria-hidden="true" />Başlangıca dön</Link>
     </article>
   )
 }
 
 export function KeyboardGuide() {
   return (
-    <Article title="Keyboard navigation">
-      <h2>Move between links</h2>
-      <p>Press <kbd>Tab</kbd> to move to the next link or <kbd>Shift</kbd> + <kbd>Tab</kbd> to move back. An outline shows which link has focus.</p>
-      <p>Press <kbd>Enter</kbd> to open the link. Focus moves to the heading on the new page.</p>
-      <h2>Skip the menu</h2>
-      <p>When you first open a page, press <kbd>Tab</kbd> to reveal “Skip to main content”. Press <kbd>Enter</kbd> to go straight to the content.</p>
+    <Article title="Klavye ile gezinme">
+      <h2>Bağlantılar arasında ilerleme</h2>
+      <p><kbd>Tab</kbd> ile sonraki bağlantıya, <kbd>Shift</kbd> + <kbd>Tab</kbd> ile önceki bağlantıya geçin. Çerçeve, odağın yerini gösterir.</p>
+      <p><kbd>Enter</kbd> ile bağlantıyı açın. Açılan sayfanın başlığı odaklanır.</p>
+      <h2>Menüyü atlama</h2>
+      <p>Sayfayı ilk açtığınızda <kbd>Tab</kbd> tuşuna basın. “Ana içeriğe geç” bağlantısını seçip <kbd>Enter</kbd> tuşuna basarak doğrudan içeriğe ulaşabilirsiniz.</p>
     </Article>
   )
 }
 
 export function InstallGuide() {
   return (
-    <Article title="Install SignBridge">
-      <h2>Add the app to your home screen</h2>
-      <p>In a browser that supports installation, use the install icon in the address bar or the install option in the browser menu. In Safari on iPhone, open the Share menu and choose “Add to Home Screen”.</p>
-      <p>Once installed, select the SignBridge icon on your device to open the app.</p>
-      <h2>Use the app offline</h2>
-      <p>Stay online the first time you open the app. Once your device has saved the app files, you can open the home page and both guides offline.</p>
+    <Article title="Cihaza kurulum">
+      <h2>Ana ekrana ekleme</h2>
+      <p>Kurulumu destekleyen bir tarayıcıda adres çubuğundaki yükleme simgesini veya menüdeki uygulama yükleme seçeneğini kullanın. iPhone’da Safari’nin paylaşım menüsünden “Ana Ekrana Ekle”yi seçin.</p>
+      <p>Kurulumdan sonra İşaret Köprüsü’nü cihazınızdaki SignBridge simgesinden açabilirsiniz.</p>
+      <h2>Çevrimdışı açma</h2>
+      <p>İlk açılışta çevrimiçi kalın. Uygulama dosyaları cihaza kaydedildikten sonra başlangıç sayfasını ve bu rehberleri internet bağlantısı olmadan da açabilirsiniz.</p>
     </Article>
   )
 }
 
 export function NotFound() {
-  return <Article title="Page not found"><p>Check the address or return to the home page.</p></Article>
+  return <Article title="Sayfa bulunamadı"><p>Adresi kontrol edin veya başlangıç sayfasına dönün.</p></Article>
 }

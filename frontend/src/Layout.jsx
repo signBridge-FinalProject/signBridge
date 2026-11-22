@@ -22,21 +22,21 @@ export function Layout() {
         // Keep the skip target out of history so Back restores the route heading.
         event.preventDefault()
         main.current.focus()
-      }}>Skip to main content</a>
+      }}>Ana içeriğe geç</a>
       <header className="masthead">
         <div className="wrap header-inner">
           <span className="wordmark"><img src="/icon-192.png" alt="" />SignBridge</span>
-          <nav aria-label="Main navigation">
-            <NavLink to="/" end>Home</NavLink>
-            <NavLink to="/klavye">Keyboard</NavLink>
-            <NavLink to="/kurulum">Install</NavLink>
+          <nav aria-label="Ana gezinme">
+            <NavLink to="/" end>Başlangıç</NavLink>
+            <NavLink to="/klavye">Klavye</NavLink>
+            <NavLink to="/kurulum">Kurulum</NavLink>
           </nav>
         </div>
       </header>
       <main id="icerik" ref={main} tabIndex={-1} className="wrap">
         <Outlet />
       </main>
-      <footer className="wrap footer"><span>SignBridge-TR</span>Yaşar University</footer>
+      <footer className="wrap footer"><span>SignBridge-TR</span>Yaşar Üniversitesi</footer>
     </>
   )
 }
