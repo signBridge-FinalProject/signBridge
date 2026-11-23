@@ -1,0 +1,22 @@
+gloss,used_in,source,category,method_category,autsl_class_id,autsl_tr,autsl_en,train_samples,validation_samples,test_samples_descriptive,rationale
+HASTANE,HP-1,happy-paths.md §3 step 2,found,"exact (provisional, name level)",83,hastane,hospital,126,20,17,Same class name; EN label 'hospital' agrees with the intended meaning. Name level only.
+DOKTOR,HP-1,happy-paths.md §3 step 2,found,"exact (provisional, name level)",52,doktor,doctor,112,18,10,Same class name; EN label 'doctor' agrees. Name level only.
+YARDIM,HP-1,happy-paths.md §3 step 2,found,"exact (provisional, name level)",211,yardim,help,127,20,14,Same class name; EN label 'help' agrees. Name level only.
+İLAÇ,HP-2,happy-paths.md §4 step 4,found,"exact (provisional, name level)",96,ilac,medicine,123,17,17,Same class name; EN label 'medicine' agrees. Name level only.
+YARIN,HP-2;HP-3,happy-paths.md §4 step 4; happy-paths.md §5 step 2,found,"exact (provisional, name level)",212,yarin,tomorrow,117,17,17,Same class name; EN label 'tomorrow' agrees. Name level only.
+OKUL,HP-3,happy-paths.md §5 step 2,found,"exact (provisional, name level)",144,okul,school,126,20,17,Same class name; EN label 'school' agrees. Name level only.
+ÇAY,HP-4,happy-paths.md §6 step 2,found,"exact (provisional, name level)",38,cay,tea,126,20,17,Same class name; EN label 'tea' agrees. Name level only.
+Mİ,HP-2;HP-3,happy-paths.md §4 step 4; happy-paths.md §5 step 2,not found,missing,,,,,,,No class for the question particle. This does not show that TİD needs a separate manual question sign; whether the question can be formed without one is an open linguistic question.
+BULUŞMAK,HP-3,happy-paths.md §5 step 2,not found,missing,,,,,,,No class 'bulusmak' or spelling variant.
+BİR,HP-4,happy-paths.md §6 step 2,not found,missing,,,,,,,No number classes. The single 'saat' (hour) class does not cover numbers or clock times.
+SİMİT,HP-4,happy-paths.md §6 step 2,not found,missing,,,,,,,No class 'simit'.
+LÜTFEN,HP-4,happy-paths.md §6 step 2,not found,missing,,,,,,,"No class 'lutfen'. 'rica_etmek' (request) is a candidate replacement, not a verified synonym."
+ECZANE,documented scenario vocabulary,Proposal R6 Methods 1 (c); SB-14,found,"exact (provisional, name level)",58,eczane,pharmacy,120,16,17,Pharmacy word (Proposal R6 Methods 1 (c); SB-14). EN label 'pharmacy' agrees. Name level only.
+TEŞEKKÜR,documented scenario vocabulary,SB-14,found,"exact (provisional, name level)",196,tesekkur,thanks,126,20,17,SB-14 example entry. EN label 'thanks' agrees. Name level only.
+SAAT,documented scenario vocabulary,Proposal R6 Methods 1 (c); Tech Notes §1.1,needs linguistic check,uncertain,165,saat,hour,127,20,17,Single class 'saat' (EN 'hour'). Whether it is the sign intended for appointment or clock-time use needs checking; it does not cover numbers or clock times.
+RANDEVU,documented scenario vocabulary,Proposal R6 Methods 1 (c); SB-14,not found,missing,,,,,,,Hospital word; no class (Proposal R6 Methods 1 (c); SB-14).
+KARIN,documented scenario vocabulary,Proposal R6 Methods 1 (c),not found,missing,,,,,,,Hospital word; no class (Proposal R6 Methods 1 (c)).
+AĞRI,documented scenario vocabulary,Proposal R6 Methods 1 (c),not found,missing,,,,,,,Hospital word; no class (Proposal R6 Methods 1 (c)).
+GİTMEK,documented scenario vocabulary,Proposal R6 Methods 1 (c); SB-14,not found,missing,,,,,,,No class (Proposal R6 Methods 1 (c); SB-14).
+SU,documented scenario vocabulary,SB-14,not found,missing,,,,,,,SB-14 example entry; no class.
+BUGÜN,documented scenario vocabulary,SB-14,not found,missing,,,,,,,SB-14 example entry; no class.

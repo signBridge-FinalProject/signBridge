@@ -1,0 +1,6 @@
+scenario,title,source,numerator_found_distinct,denominator_required_distinct,coverage,coverage_pct,tokens_found,tokens_total,needs_check,not_found,fingerspelled_reported_separately
+HP-1,Hospital desk (Ayşe),happy-paths.md §3 step 2,3,3,3/3,100%,3,3,,,0
+HP-2,Pharmacy counter (customer),happy-paths.md §4 step 4,2,3,2/3,67%,2,3,,Mİ,0
+HP-3,"Classroom, Emre signing (Zeynep)",happy-paths.md §5 step 2,2,4,2/4,50%,2,4,,BULUŞMAK;Mİ,0
+HP-4,Café order (Can),happy-paths.md §6 step 2,1,4,1/4,25%,1,5,,BİR;SİMİT;LÜTFEN,0
+All happy paths (distinct across scenarios),,,7,12,7/12,58%,8,15,,Mİ;BULUŞMAK;BİR;SİMİT;LÜTFEN,0
