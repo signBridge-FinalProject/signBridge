@@ -1,0 +1,3 @@
+# SB-49 subset selection (ml/data/select_subset.py). Versions match ml/eval/requirements.txt.
+opencv-python==5.0.0.93
+numpy==2.4.6
