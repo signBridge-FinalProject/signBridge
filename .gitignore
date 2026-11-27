@@ -2,3 +2,11 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# SB-50: landmark extraction outputs and local dataset/video folders.
+# Videos, labels, mappings and extracted landmarks must never be committed
+# (SB-16, SB-46, SB-47).
+landmarks_out/
+*.npz
+data/local/
+.pytest_cache/

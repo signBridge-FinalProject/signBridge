@@ -25,15 +25,9 @@ import cv2
 import mediapipe as mp
 import numpy as np
 
-# Landmark groups in the fixed concatenation order used for the feature vector.
-# Pose is the only group whose landmarks carry a meaningful visibility score.
-GROUPS = [
-    # (name, attribute on Holistic results, landmark count, fields)
-    ("pose", "pose_landmarks", 33, ("x", "y", "z", "visibility")),
-    ("face", "face_landmarks", 468, ("x", "y", "z")),
-    ("left_hand", "left_hand_landmarks", 21, ("x", "y", "z")),
-    ("right_hand", "right_hand_landmarks", 21, ("x", "y", "z")),
-]
+# GROUPS, group_array and flatten_frame live in landmark_layout.py (shared with
+# the SB-50 batch extractor); behaviour is unchanged.
+from landmark_layout import GROUPS, flatten_frame, group_array
 
 # Pose landmark indices relevant to signing (upper body).
 POSE_UPPER_BODY = {
@@ -43,35 +37,11 @@ POSE_UPPER_BODY = {
 }
 
 
-def group_array(landmark_list, count, fields):
-    """Convert a MediaPipe landmark list to a (count, len(fields)) array.
-
-    Returns None if the group was not detected in this frame.
-    """
-    if landmark_list is None:
-        return None
-    lms = landmark_list.landmark
-    if len(lms) != count:
-        raise ValueError(f"expected {count} landmarks, got {len(lms)}")
-    return np.array([[getattr(lm, f) for f in fields] for lm in lms], dtype=np.float32)
-
-
 def raw_visibility_stats(landmark_list):
     """Return (has_visibility_field_set, mean raw visibility) for a landmark list."""
     lms = landmark_list.landmark
     has_field = any(lm.HasField("visibility") for lm in lms)
     return has_field, float(np.mean([lm.visibility for lm in lms]))
-
-
-def flatten_frame(arrays):
-    """Concatenate all groups into one fixed-size vector (zero-fill missing groups)."""
-    parts = []
-    for name, _, count, fields in GROUPS:
-        arr = arrays[name]
-        if arr is None:
-            arr = np.zeros((count, len(fields)), dtype=np.float32)
-        parts.append(arr.reshape(-1))
-    return np.concatenate(parts)
 
 
 def longest_run(flags):
