@@ -1,0 +1,62 @@
+{
+  "script": "ml/data/select_subset.py (SB-49)",
+  "run_at": "2026-11-27T21:46:49+03:00",
+  "python": "3.12.10",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "opencv": "5.0.0",
+  "numpy": "2.4.6",
+  "parameters": {
+    "samples_per_class": 40,
+    "no_quality_selection": [
+      "test"
+    ],
+    "min_frames": 16,
+    "min_brightness": 30.0,
+    "max_brightness": 225.0,
+    "min_contrast": 15.0,
+    "min_sharpness": 0.0,
+    "min_motion": 0.5,
+    "max_frozen_ratio": 0.5,
+    "frozen_diff": 0.25,
+    "frame_stride": 1,
+    "limit": 0,
+    "workers": 2
+  },
+  "classes_argument": [
+    "coverage-glosses.csv",
+    "candidate-classes.csv"
+  ],
+  "chosen_class_ids": [
+    15,
+    24,
+    32,
+    38,
+    52,
+    58,
+    83,
+    96,
+    138,
+    144,
+    147,
+    154,
+    164,
+    165,
+    172,
+    185,
+    186,
+    196,
+    211,
+    212
+  ],
+  "inputs_sha256": {
+    "signlist": "43b4627505d1775be5c8cc95decc6ce8ed0f8fe39cfc42973d7af8f7d257403a",
+    "train_labels": "13ab78789655d5ccde3a056968bc3c3433002a459d9ae383822bab5223e7b86c",
+    "validation_labels": "12e74248fb6199ad41fa58aa85b151966e6da31912ec109b790c6c6d627c773b",
+    "test_labels": "a3fe15717484beb2565fd812aba720afcccb36c43173f891ce31163af9137651"
+  },
+  "outputs_sha256": {
+    "quality.csv": "64d09295f452fb3dc17bca4e87aa1f92e63200e11b90af820a731e5a9e409049",
+    "manifest.csv": "c95c69d9f5035a96367396d2e4933722ae8b1ae2d790710481eebd8739b00358"
+  },
+  "measure_seconds": 730.4
+}

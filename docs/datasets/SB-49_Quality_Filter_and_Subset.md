@@ -3,7 +3,7 @@
 - **Jira:** [SB-49](https://el-dili.atlassian.net/browse/SB-49)
 - **Owner:** KUTAY (Jira assignee)
 - **Project:** SignBridge-TR, Yaşar University Software Engineering senior project
-- **Status:** Script and tests ready for review, 27 November 2026. Checked on a small example package only. The full run on the verified AUTSL data (AC-4) is still to be done by Ceren Bilgenoğlu, who holds the SB-46 verified copy.
+- **Status:** Ready for re-review, 27 November 2026. The full run on the SB-46 verified data (AC-4) was carried out on 27 November 2026 by Ceren Bilgenoğlu, who holds the verified copy, with script version `e000c69`; results in section 7. The run does not approve a final vocabulary or training subset.
 - **Depends on:** [SB-46](https://el-dili.atlassian.net/browse/SB-46) (verified data and class mapping). Related: [SB-48](https://el-dili.atlassian.net/browse/SB-48) (scenario coverage audit).
 - **Advisor source:** [Sprint 3 Review – Advisor Feedback](https://el-dili.atlassian.net/wiki/spaces/SIGNBRIDGE/pages/23134209/Sprint+3+Review+Advisor+Feedback) (data preparation): prefer everyday vocabulary, limit the number of copies per sign, and measure video quality with code instead of using every video.
 
@@ -70,7 +70,7 @@ Each measure is computed with OpenCV on the greyscale frames of the **colour** v
 | `brightness` | Mean grey level, 0–255 | < 30 or > 225 | Whole-frame average. A bright background can hide dark hands, and the other way round. |
 | `contrast` | Mean per-frame standard deviation of grey levels | < 15 | Low for a flat image (covered lens, fog, overexposure). Plain backgrounds lower it without harming the sign. |
 | `sharpness` | Mean variance of the Laplacian (blur proxy) | off by default; used for ranking | Rises with background texture and compression noise, so values are only compared between videos of the same class. There is no universal blur threshold. |
-| `motion` | Mean absolute difference between consecutive frames | < 0.5 | A sign needs movement, so near-zero motion points to a frozen or empty clip. Background movement and camera noise also count as motion. |
+| `motion` | Mean absolute difference between consecutive frames | < 0.5 | Near-zero motion can point to a frozen or empty clip, but a low value is **not** on its own evidence of a broken video: valid signs with small or slow movements also score low (see section 7.3). Background movement and camera noise also count as motion. |
 | `frozen_ratio` | Share of consecutive frame pairs with a mean difference below 0.25 | > 0.5 | Detects stuck or duplicated frames. A long hold at the start or end raises it. |
 | depth presence | Depth video exists and is not empty | missing or empty | Does not decode the depth video. |
 
@@ -125,27 +125,67 @@ The classes of the three videos (41, 114, 136, 164) were chosen. All other video
 
 This run only shows that the script works end to end on real AUTSL files. The three videos pass every quality threshold. Its counts are not the AC-4 result.
 
-## 7. Full run on the verified data (AC-4) – to do
+## 7. Full run on the verified data (AC-4)
 
-Ceren runs the command in section 2 on the SB-46 verified copy and adds the results here:
+### 7.1 Run
 
-- [ ] Command and parameters used (copy from `run.json`)
-- [ ] Counts before and after selection per split (`summary.csv`)
-- [ ] Exclusions per rule, and a check of a few excluded videos by eye to confirm that the thresholds catch real problems
-- [ ] `quality-distribution.csv`, and any threshold change made after looking at it
-- [ ] SHA-256 of the local `manifest.csv`
-- [ ] Before committing, check that the files contain no sample IDs and no class names; then commit `summary.csv`, `class-summary.csv`, `quality-distribution.csv` and `run.json` under `docs/datasets/SB-49/`
+| Item | Value |
+|---|---|
+| Date | 27 November 2026, 21:46 (UTC+3) |
+| Run by | Ceren Bilgenoğlu, on the computer that holds the SB-46 verified copy (the data stays there) |
+| Script version | `e000c69` (branch `SB-49`) |
+| Environment | Windows 11, Python 3.12.10, OpenCV 5.0.0, NumPy 2.4.6, 2 workers |
+| Classes | The 20 SB-48 found and candidate classes (`--classes coverage-glosses.csv candidate-classes.csv`); an example choice, not a vocabulary decision |
+| Parameters | Defaults: `--samples-per-class 40`, test split not reduced by quality, thresholds unchanged (section 3) |
+| Exit code | 0 |
+| Measuring time | 730.4 s for 3,126 colour videos |
+| Input SHA-256 | Class list and the three label files match SB-48 §2 (`43b46275…`, `13ab7878…`, `12e74248…`, `a3fe1571…`) |
+| Local `manifest.csv` SHA-256 | `c95c69d9f5035a96367396d2e4933722ae8b1ae2d790710481eebd8739b00358` |
+| Local `quality.csv` SHA-256 | `64d09295f452fb3dc17bca4e87aa1f92e63200e11b90af820a731e5a9e409049` |
 
-Run time is not measured yet. A short dry run with `--limit 200` gives an estimate before the full run.
+The manifest and the per-video measures stay on the run computer. The four aggregate outputs are committed in [`SB-49/`](SB-49/): `summary.csv`, `class-summary.csv`, `quality-distribution.csv` and `run.json`. They contain no sample IDs and no class names (checked before committing).
+
+### 7.2 Counts before and after selection
+
+| Split | Labelled samples (all 226 classes) | In the 20 chosen classes | Missing / unreadable | Excluded by a threshold | Passed, not needed | **Selected** | Signers selected |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Train | 28,142 | 2,420 | 0 / 0 | 12 (all `motion`) | 1,608 | **800** | 31 |
+| Validation | 4,418 | 386 | 0 / 0 | 0 | 0 | **386** | 6 |
+| Test | 3,742 | 320 | 0 / 0 | not applied | 0 | **320** | 6 |
+| Total | 36,302 | 3,126 | 0 / 0 | 12 | 1,608 | **1,506** | 43 |
+
+- **Train:** every chosen class reached the limit of 40 videos (20 × 40 = 800). All 31 training signers remain. Per class (`class-summary.csv`), the 12 exclusions fall in five classes (IDs 24: 4, 172: 3, 164: 2, 185: 2, 147: 1). Classes 24 and 172 each lose one signer (31 → 30 and 24 → 23), because all of that signer's videos in the class were excluded by the motion threshold (signers are taken in turn, so every signer with a passing video gets at least one).
+- **Validation:** no class has more than 40 videos and no video failed a threshold, so all 386 videos are kept. The per-class limit only changes the train split in this run.
+- **Test:** kept whole by design (section 4). Its lowest motion value is 0.493, so at least one test video would have failed the motion threshold if the filter had been applied there.
+- No video was missing, unreadable or excluded by brightness, contrast, frame count, frozen frames or a missing depth video.
+
+### 7.3 Threshold review
+
+The measured ranges (`quality-distribution.csv`, colour videos of the 20 classes) are far from the brightness (30–225), contrast (15) and frame-count (16) limits in all splits: brightness 101.7–151.9, contrast 40.7–88.3, at least 20 decoded frames. Every video is 512×512 at 30 fps. Frozen-frame ratios stay at or below 0.294. Only the motion threshold excluded anything.
+
+Ceren opened two of the 12 motion-excluded train videos, from different classes. In both, the person signing is visibly moving. So a motion value below 0.5 does **not** mean that a video is broken. The motion threshold can also exclude valid signs with little movement. Opening two videos does not check whether the signs are correct.
+
+Consequences:
+
+- The 12 exclusions are reported as "low motion", not as broken videos.
+- The thresholds were **not** changed for this run. With 40 of 90–127 train videos needed per class, the exclusions did not reduce any class below the limit.
+- Before this subset is used for training, the team should decide whether to keep `--min-motion 0.5`, lower it, or turn it off (`--min-motion 0`) and rely on ranking only. The lowest train motion value was 0.447 and the 5th percentile 0.666.
+
+### 7.4 What this run does not establish
+
+- It does not fix the final vocabulary or approve a training subset. The 20 classes are the SB-48 example set.
+- It does not check that the signs are correct, that the hands stay in the frame, or that MediaPipe can track the signer (SB-50/SB-51).
+- Container codec, profile and pixel format are not recorded by the script; it confirms 512×512 and 30 fps for the 3,126 measured colour videos only.
 
 ## 8. Showing the process in the end-of-term presentation (AC-4)
 
 1. **Start:** 36,302 labelled samples, 226 classes, 31/6/6 signers (SB-46).
 2. **Vocabulary:** the chosen everyday classes and the reason (SB-48), giving the "chosen classes" count in `summary.csv`.
-3. **Quality screening:** the measures in section 3, with one passing and one excluded frame as examples, and the exclusions per rule.
+3. **Quality screening:** the measures in section 3 and the exclusions per rule (full run: 12 train videos, all by the motion threshold).
 4. **Limit per sign:** at most N videos per class, signers taken in turn.
-5. **Result:** counts before and after per split, and the signer count kept per class (`class-summary.csv`).
+5. **Result:** 36,302 → 3,126 (20 classes) → 1,506 selected (train 800, validation 386, test 320), with all 43 signers kept (section 7.2).
 6. **Reproducibility:** one command, parameters and hashes in `run.json`; the test split is not filtered by quality.
+7. **Limitation:** low motion is not proof of a broken video (section 7.3).
 
 ## 9. Tests
 
@@ -168,7 +208,7 @@ Run time is not measured yet. A short dry run with `--limit 200` gives an estima
 | AC-1 | Section 2; `select_subset.py` arguments | Done, for review |
 | AC-2 | Section 3; `quality.csv` | Done, for review |
 | AC-3 | Sections 4–5; `manifest.csv` | Done (manifest produced locally, not committed), for review |
-| AC-4 | Sections 6–8 | Example run done; full run on the verified data pending (Ceren) |
+| AC-4 | Sections 6–8; `SB-49/` evidence | Done, for review: full run on the verified data, 3,126 → 1,506 videos (section 7) |
 | AC-5 | Sections 1 and 5 | Done: no dataset files in the change |
 | AC-6 | Branch `SB-49`, `SB-49:` commits, [PR #51](https://github.com/signBridge-FinalProject/signBridge/pull/51) to `main` | Done, for review |
 | AC-7 | — | Pending independent approval, checks and merge |
