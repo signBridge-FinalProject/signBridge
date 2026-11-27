@@ -2,3 +2,12 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# SB-51: private SQLite metadata databases (and their journal/WAL files) stay
+# outside version control (SB-16, SB-46, SB-47).
+*.sqlite3
+*.sqlite3-*
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*

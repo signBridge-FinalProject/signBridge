@@ -162,6 +162,14 @@ split for the balanced-test ChaLearn release. These figures are handoff metadata
 not seeded application rows. They do not prove that every class has a curated or
 expert-reviewed lexicon entry. SB-51 must run its own import reconciliation.
 
+SB-51 implements this boundary in [`import_dataset.py`](import_dataset.py)
+(standard library only), with example queries in
+[`queries/dataset_examples.sql`](queries/dataset_examples.sql) and behavioral tests
+in `tests/test_import_dataset.py` that use fabricated files only. Formats, commands,
+re-run and rollback behaviour, count reconciliation and the fabricated-data
+validation are recorded in
+[SB-51 metadata import](../../docs/datasets/SB-51_Metadata_Import.md).
+
 Database files, raw/derived datasets, credentials, full provider label/mapping
 exports and generated private JSON exports stay out of the repository. The
 committed component consists only of SQL, Python, tests and documentation.
