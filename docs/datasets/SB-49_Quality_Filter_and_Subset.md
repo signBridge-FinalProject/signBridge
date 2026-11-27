@@ -12,7 +12,7 @@
 | File | Purpose |
 |---|---|
 | `ml/data/select_subset.py` | The selection script. Measures each colour video, applies the thresholds, selects the subset and writes the manifest and the summaries. |
-| `ml/data/test_select_subset.py` | 13 unit tests on synthetic videos generated during the test (no AUTSL data). |
+| `ml/data/test_select_subset.py` | 14 unit tests on synthetic videos generated during the test (no AUTSL data). |
 | `ml/data/requirements.txt` | OpenCV and NumPy, pinned to the versions in `ml/eval/requirements.txt`. |
 | `docs/datasets/SB-49_Quality_Filter_and_Subset.md` | This document. |
 
@@ -28,7 +28,7 @@ python -m venv .venv
 pip install -r ml/data/requirements.txt
 ```
 
-Run from the repository root. The paths below follow the SB-46 verification layout (`D:\AUTSL\...`) and are examples only:
+Run from the repository root. The paths below follow the SB-46 verification layout (`D:\AUTSL\...`) and are examples only. Check each path against the actual local copy before running, in particular the location of `SignList_ClassId_TR_EN.csv`, which SB-46 does not list:
 
 ```powershell
 python ml/data/select_subset.py `
@@ -98,11 +98,11 @@ The split boundaries from AUTSL are kept as they are, so the signer-independent 
 | `manifest.csv` | **Selection manifest:** one row per measured sample with split, sample ID, class ID, signer, `included` (yes/no), selection rank, quality score and the reason for inclusion or exclusion | **No** – lists sample IDs from the dataset |
 | `quality.csv` | All measures per video | **No** – lists sample IDs |
 | `summary.csv` | Counts before and after selection per split, with exclusions per rule | Yes, aggregate only |
-| `class-summary.csv` | Per class and split: samples before, excluded, selected, signers before and selected | Yes, aggregate only |
+| `class-summary.csv` | Per class ID and split: samples before, excluded, selected, signers before and selected. Class IDs only, no Turkish or English class names | Yes, aggregate only |
 | `quality-distribution.csv` | Min, p05, p25, median, p75, p95 and max of each measure per split | Yes, aggregate only |
 | `run.json` | Parameters, chosen class IDs, SHA-256 of the input label files and of `manifest.csv`/`quality.csv`, tool versions and run time | Yes |
 
-The manifest stays with the local data, as the SB-46 class mapping does. Its SHA-256 in `run.json` identifies the exact selection. Teammates with dataset access can reproduce it with the same command and parameters. A test checks that the aggregate files contain no sample IDs.
+The manifest stays with the local data, as the SB-46 class mapping does. Its SHA-256 in `run.json` identifies the exact selection. Teammates with dataset access can reproduce it with the same command and parameters. No publishable file contains class names: the TR/EN names come from the private class list, and exporting them for an all-class run would reproduce the full ClassId/TR/EN mapping that SB-46 keeps out of the repository. Readers who need names look the IDs up in their local mapping. Tests check that the aggregate files contain no sample IDs and no class names.
 
 ## 6. Example run on the small example package
 
@@ -134,7 +134,7 @@ Ceren runs the command in section 2 on the SB-46 verified copy and adds the resu
 - [ ] Exclusions per rule, and a check of a few excluded videos by eye to confirm that the thresholds catch real problems
 - [ ] `quality-distribution.csv`, and any threshold change made after looking at it
 - [ ] SHA-256 of the local `manifest.csv`
-- [ ] Commit `summary.csv`, `class-summary.csv`, `quality-distribution.csv` and `run.json` under `docs/datasets/SB-49/`
+- [ ] Before committing, check that the files contain no sample IDs and no class names; then commit `summary.csv`, `class-summary.csv`, `quality-distribution.csv` and `run.json` under `docs/datasets/SB-49/`
 
 Run time is not measured yet. A short dry run with `--limit 200` gives an estimate before the full run.
 
@@ -149,7 +149,7 @@ Run time is not measured yet. A short dry run with `--limit 200` gives an estima
 
 ## 9. Tests
 
-`python -m unittest test_select_subset -v` (in `ml/data`) gives 13/13 passed (Python 3.13, OpenCV 5.1). The tests generate small MP4 files and cover:
+`python -m unittest test_select_subset -v` (in `ml/data`) gives 14/14 passed (Python 3.13, OpenCV 5.1, ResourceWarnings as errors). The tests generate small MP4 files and cover:
 
 - a moving video that passes every rule, with frame count and size read correctly;
 - dark, flat (no contrast) and frozen videos, each excluded by the right rule;
@@ -158,6 +158,7 @@ Run time is not measured yet. A short dry run with `--limit 200` gives an estima
 - signer round-robin and the per-class limit;
 - the test split kept whole while an unreadable test file is still dropped;
 - an end-to-end run with a class CSV that contains a row without a class ID, checking counts, manifest reasons, `run.json` and that aggregate files contain no sample IDs;
+- an all-class run, checking that no publishable file contains a class name and that `class-summary.csv` has no name columns;
 - an unknown class ID and a malformed label row, both rejected with exit status 2 and no output.
 
 ## 10. Acceptance criteria
@@ -169,6 +170,6 @@ Run time is not measured yet. A short dry run with `--limit 200` gives an estima
 | AC-3 | Sections 4–5; `manifest.csv` | Done (manifest produced locally, not committed), for review |
 | AC-4 | Sections 6–8 | Example run done; full run on the verified data pending (Ceren) |
 | AC-5 | Sections 1 and 5 | Done: no dataset files in the change |
-| AC-6 | Branch `SB-49`, `SB-49:` commits, PR to `main` | Pending |
+| AC-6 | Branch `SB-49`, `SB-49:` commits, [PR #51](https://github.com/signBridge-FinalProject/signBridge/pull/51) to `main` | Done, for review |
 | AC-7 | — | Pending independent approval, checks and merge |
 | AC-8 | — | Pending; Confluence and Jira evidence links follow review |

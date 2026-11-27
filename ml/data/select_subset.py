@@ -24,11 +24,14 @@ What the script does
    - quality.csv    one row per measured video with all measures;
    - manifest.csv   one row per measured sample: included yes/no and the reason;
    - summary.csv    counts before and after selection, per split;
-   - class-summary.csv  counts before and after selection, per class and split;
+   - class-summary.csv  counts before and after selection, per class ID and split
+                    (class IDs only; no TR/EN names from the private class list);
    - quality-distribution.csv  percentiles of each measure, per split;
    - run.json       parameters, input file SHA-256, tool versions, timings.
    quality.csv and manifest.csv list sample IDs and must stay outside the
-   repository; the other files contain aggregates only (AC-5).
+   repository. The other files contain aggregates only: no sample IDs and no
+   class names, so publishing them never reproduces the ClassId/TR/EN mapping
+   (SB-46 handling rule; AC-5).
 
 QUALITY MEASURES (computed on greyscale frames)
 -----------------------------------------------
@@ -455,7 +458,8 @@ def main(argv=None):
         })
         for cid in sorted({r["class_id"] for r in m}):
             cm = [r for r in m if r["class_id"] == cid]
-            class_rows.append({"split": name, "class_id": cid, "tr": classes[cid][0], "en": classes[cid][1],
+            # Class IDs and counts only: TR/EN names come from the private class list and are not exported
+            class_rows.append({"split": name, "class_id": cid,
                                "before": len(cm),
                                "excluded": sum(1 for r in cm if r["reason"].startswith("excluded: ")),
                                "selected": sum(1 for r in cm if r["included"] == "yes"),
@@ -469,7 +473,7 @@ def main(argv=None):
                          "p95": pct(vals, .95), "max": pct(vals, 1)})
     write_csv(os.path.join(a.out, "summary.csv"), list(summary[0]), summary)
     write_csv(os.path.join(a.out, "class-summary.csv"),
-              ["split", "class_id", "tr", "en", "before", "excluded", "selected", "signers_before", "signers_selected"],
+              ["split", "class_id", "before", "excluded", "selected", "signers_before", "signers_selected"],
               class_rows)
     write_csv(os.path.join(a.out, "quality-distribution.csv"),
               ["split", "measure", "n", "min", "p05", "p25", "median", "p75", "p95", "max"], dist)

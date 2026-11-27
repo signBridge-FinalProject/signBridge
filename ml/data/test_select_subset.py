@@ -188,13 +188,28 @@ class EndToEndTests(unittest.TestCase):
         manifest = self.read("manifest.csv")
         self.assertEqual(len(manifest), 6)
         self.assertTrue(all(r["reason"] for r in manifest))
-        run = json.load(open(os.path.join(self.out, "run.json"), encoding="utf-8"))
+        with open(os.path.join(self.out, "run.json"), encoding="utf-8") as f:
+            run = json.load(f)
         self.assertEqual(run["chosen_class_ids"], [0, 1])
         self.assertIn("train_labels", run["inputs_sha256"])
         # aggregate files carry no sample IDs
         for name in ("summary.csv", "class-summary.csv", "quality-distribution.csv"):
             with open(os.path.join(self.out, name), encoding="utf-8") as f:
                 self.assertNotRegex(f.read(), r"signer\d+_sample\d+")
+
+    def test_publishable_outputs_carry_no_class_names(self):
+        """SB-46 boundary: aggregates must not reproduce the ClassId/TR/EN mapping (all-class run)."""
+        code, _ = self.run_main([])
+        self.assertEqual(code, 0)
+        names = ["hastane", "hospital", "doktor", "doctor", "cay", "tea"]
+        for name in ("summary.csv", "class-summary.csv", "quality-distribution.csv", "run.json"):
+            with open(os.path.join(self.out, name), encoding="utf-8") as f:
+                text = f.read().lower()
+            for n in names:
+                self.assertNotRegex(text, rf"\b{n}\b", f"{n} found in {name}")
+        with open(os.path.join(self.out, "class-summary.csv"), encoding="utf-8") as f:
+            self.assertEqual(next(csv.reader(f)),
+                             ["split", "class_id", "before", "excluded", "selected", "signers_before", "signers_selected"])
 
     def test_unknown_class_rejected_without_output(self):
         code, err = self.run_main(["--classes", "0,9"])
