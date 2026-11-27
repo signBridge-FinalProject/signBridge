@@ -62,6 +62,8 @@ No claim is made that additional redistribution permissions were granted. Use re
 
 ## Follow-up
 
+**Status update (SB-52, 27 November 2026):** archive download, extraction, label, class and signer-split checks were completed in [SB-46](SB-46_AUTSL_Verification.md). The verified format and label information is summarised in the [dataset exploration document](tid-dataset-exploration.md). The items below are kept as originally recorded.
+
 - Verify archive download and extraction from the team's environment.
 - Audit labels, sign classes and signer-independent splits before training.
 - Retain the original correspondence and access credentials privately with the team.
