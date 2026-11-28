@@ -38,6 +38,7 @@ Steps inside Sign to Voice and Voice to Sign are local to the page. Their button
 7. **Avatar controls.** The wireframes show "speed 1.0× · replay". The shell shows the text "Hız 1,0×. Tekrar oynatma bu sürümde yoktur." and no replay control, because no playback exists.
 8. **Two-way conversation.** The wireframes show it as a sequence of full screens. The shell shows both sides in one layout with a "Sıra" indicator, a "Sırayı değiştir" button and an example log marked "(örnek)". The camera view does not switch automatically.
 9. **Not built.** The Quick phrases screens (MF11) and the success screens ("Outcome") are not part of SB-55. The Quick phrases button leads to a placeholder that says so.
+10. **Home page.** The SB-55 mode selection sits on the SB-54 home page, which keeps its hero and usage guides. Each mode has a short description line, and no mode is shown as highlighted or selected, as it is in step 1 of the wireframes.
 
 ## 4. Keyboard use and labels (AC-3)
 
