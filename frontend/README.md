@@ -29,7 +29,7 @@ Open <http://127.0.0.1:4173/>. The build writes the app and a versioned service 
 
 Register a child route under `Layout` in [src/main.jsx](src/main.jsx). Each screen renders one descriptive `h1` with `tabIndex={-1}`. The [shared layout](src/Layout.jsx) supplies the skip link, navigation, main landmark and footer. On a pathname change it sets the document title from the heading and moves focus there, including on browser Back and Forward. Initial loading leaves the skip link first in the tab order.
 
-The current routes are `/`, `/klavye` and `/kurulum`, with a recovery link for unknown paths. SB-54 covers MF1’s PWA launch foundation and MF12’s shared navigation and reading experience. Mode selection and two-way conversation belong to SB-55.
+The current routes are `/`, `/isaretten-sese`, `/sesten-isarete`, `/iki-yonlu`, `/hizli-ifadeler`, `/klavye` and `/kurulum`, with a recovery link for unknown paths. SB-54 covers MF1’s PWA launch foundation and MF12’s shared navigation and reading experience. SB-55 adds the mode selection on the home page and four static screen shells ([record](../docs/frontend/SB-55_Screen_Shells.md)). The shells hold placeholder content only: they never open the camera or microphone, recognise signs, speak or call a server.
 
 ## Verify in the production preview
 
