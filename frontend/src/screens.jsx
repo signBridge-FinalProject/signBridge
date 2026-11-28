@@ -184,7 +184,7 @@ export function TwoWay() {
 export function QuickPhrases() {
   return (
     <Screen title="Hızlı ifadeler" lead="Kayıtlı cümleler bu ekranda listelenecek.">
-      <p className="status-line">Bu ekran SB-55 kapsamında değildir (MF11). Mod seçiminde yalnızca yönlendirme olarak yer alır; kayıt, liste ve seslendirme yoktur.</p>
+      <p className="status-line">Bu ekran henüz hazır değil. Kayıt, liste ve seslendirme yoktur.</p>
     </Screen>
   )
 }
