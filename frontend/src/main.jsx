@@ -5,6 +5,7 @@ import '@fontsource-variable/bricolage-grotesque/wght.css'
 import './styles.css'
 import { Layout } from './Layout'
 import { Home, KeyboardGuide, InstallGuide, NotFound } from './pages'
+import { QuickPhrases, SignToVoice, TwoWay, VoiceToSign } from './screens'
 
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -19,6 +20,10 @@ createRoot(document.getElementById('root')).render(
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="isaretten-sese" element={<SignToVoice />} />
+        <Route path="sesten-isarete" element={<VoiceToSign />} />
+        <Route path="iki-yonlu" element={<TwoWay />} />
+        <Route path="hizli-ifadeler" element={<QuickPhrases />} />
         <Route path="klavye" element={<KeyboardGuide />} />
         <Route path="kurulum" element={<InstallGuide />} />
         <Route path="*" element={<NotFound />} />

@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowUpRight, AudioLines, Hand, Keyboard, MonitorDown } from 'lucide-react'
 import { Link } from 'react-router'
+import { MODES } from './screens'
 
 function GuideLink({ to, title, description, Icon }) {
   return (
@@ -24,6 +25,14 @@ export function Home() {
           <div className="bubble voice"><AudioLines /></div>
         </div>
       </div>
+      <section className="guide-section" aria-labelledby="modlar">
+        <h2 id="modlar">Nasıl iletişim kurmak istersiniz?</h2>
+        <div className="guide-list">
+          {MODES.map(({ to, title, description, Icon }) => (
+            <GuideLink key={to} to={to} title={title} description={description} Icon={Icon} />
+          ))}
+        </div>
+      </section>
       <section className="guide-section" aria-labelledby="rehber">
         <h2 id="rehber">Kullanım rehberi</h2>
         <div className="guide-list">
